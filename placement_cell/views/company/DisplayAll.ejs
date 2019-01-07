@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>All Companies</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+        <script src="/javascripts/bootstrap.js"></script>
+        <script src="/javascripts/jquery.js"></script>
+    </head>
+    <body>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Serial No.</th>
+                    <th scope="col">Company Name</th>
+                    <th scope="col">Logo</th>
+                    <th scope="col">H_R Name</th>
+                    <th scope="col">Contact Information</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% let count = 0 %>
+                <% companies.forEach((Company) => { count++ %>
+                <tr>
+                    <th scope="row"><%= count %></th>
+                    <th scope="row"><%= Company.name%></th>
+                    <td><img src = "/images/company/<%= Company.logo%>"  height="50" width="60"></td>
+                    <td><%= Company.hr %></td>
+                    <td>
+                        <b>Email_id : </b><%= Company.email_id %><br/>
+                        <b>Mobile No : </b><%= Company.mobile_no %><br/>
+                        <b>Website : </b><%= Company.website %><br/>
+                    </td>
+                    <td>
+                        <%= Company.local_address %>,<%= Company.city %>,<%= Company.state%>
+                    </td>
+                    <td>
+                        <a href = "/company/displaybyid/<%= Company._id%>">
+                          <button type="button" class="btn btn-primary">Edit</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a href = "/company/deletebyid?company_id=<%= Company._id%>">
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+                  
+                  
+    </body>
+<html>
