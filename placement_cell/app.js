@@ -10,8 +10,23 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var companyRouter = require('./routes/company');
 var state_cityRouter = require('./routes/state_city');
+
+var studentRouter = require('./routes/student')
+var branchRouter = require('./routes/branch')
 var session = require('./node_modules/express-session');
 var app = express();
+
+
+/////////////////////////////// SESSION MANAGEMENT /////////////////////
+
+var cookieSession = require('cookie-session')
+app.use(cookieSession({
+  name: 'session',
+  keys: ['KEY1, KEY2'],
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,6 +48,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/company', companyRouter);
 app.use('/state_city', state_cityRouter);
+
+app.use('/student', studentRouter);
+app.use('/branch', branchRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

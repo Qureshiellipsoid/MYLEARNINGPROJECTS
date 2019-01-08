@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title>All Students</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+        <script src="/javascripts/bootstrap.js"></script>
+        <script src="/javascripts/jquery.js"></script>
+    </head>
+    <body>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Serial No.</th>
+                    <th scope="col">Student Name</th>
+                    <th scope="col">Photo</th>
+                    <th scope="col">Contact Information</th>
+                    <th scope="col">Branch and Erp. no.</th>
+                    <th scope="col">Academic Details</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% let count = 0 %>
+                <% students.forEach((student) => { count++ %>
+                <tr>
+                    <th scope="row"><%= count %></th>
+                    <th scope="row"><%= student.name%></th>
+                    <td><img src = "/images/student/<%= student.pic%>"  height="60" width="60"></td>
+                    <td>
+                        <b>Email_id : </b><%= student.email_id %><br/>
+                        <b>Mobile No : </b><%= student.mobile_no %><br/>
+                    </td>
+                    <td>
+                        <b>Branch : </b><%= student.branch_name %><br/>
+                        <b>ERP No. : </b><%= student.erp_no %><br/>
+                    </td>
+                    <td>
+                        <b>Class 10th : </b><%= student.class_10_per %><br/>
+                        <b>Class 12th : </b><%= student.class_12_per %><br/>
+                        <b>Aggregate SGPA : </b><%= student.sgpa %><br/>
+                    </td>
+                    <td>
+                        <a href = "/student/displaybyid/<%= student._id%>">
+                          <button type="button" class="btn btn-primary">Edit</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a href = "/student/deletebyid?student_id=<%= student._id%>">
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+                  
+                  
+    </body>
+<html>

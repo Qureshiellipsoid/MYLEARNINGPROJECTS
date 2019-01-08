@@ -1,0 +1,76 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>Register</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+        <script src="/javascripts/bootstrap.js"></script>
+        <script src="/javascripts/jquery.js"></script>
+        <script src="/javascripts/student/branch.js"></script>
+    </head>
+    <div class="container">
+        <div  style="align-content: center">
+           <h1 style="text-align:center">STUDENT REGISTRATION</h1>
+        </div>
+        <div >
+            <form action = "/student/register_submit" method = "post" enctype="multipart/form-data" >
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Name</label>
+                    <input type="text" class="form-control" id="name" name = "name" aria-describedby="emailHelp" placeholder="Enter email">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlSelect2">Branch Name</label>
+                    <select  class="form-control" id="branch_name" name = "branch_code">
+                        <option selected disabled>Select Branch Name</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" class="form-control" name = "email_id" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Mobile No </label>
+                    <input type="number" class="form-control" id="mobile_no" name = "mobile_no" aria-describedby="emailHelp" placeholder="Enter mobile no">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Enrollment No.</label>
+                    <input type="text" class="form-control" id="erp_no" name = "erp_no" aria-describedby="emailHelp" placeholder="Enter enrollment no.">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">10th percentage</label>
+                    <input type="number" class="form-control" id="class_10_per" name = "class_10_per" aria-describedby="emailHelp" placeholder="Enter 10th percentage">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">12th percentage </label>
+                    <input type="number" class="form-control" id="class_12_per" name = "class_12_per" aria-describedby="emailHelp" placeholder="Enter 12th percentage">
+                </div>
+                
+                <div class="form-group">
+                    <label for="exampleInputEmail1">SGPA </label>
+                    <input type="number" class="form-control" id="sgpa" name = "sgpa" aria-describedby="emailHelp" placeholder="Enter SGPA">
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" class="form-control" name = "password" id="exampleInputPassword1" placeholder="Password">
+                </div>
+
+                <div class="form-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name = "pic" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                        <label class="custom-file-label" for="inputGroupFile01">Choose your photo</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</html>

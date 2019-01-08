@@ -3,12 +3,7 @@ var router = express.Router();
 var mysql = require('mysql');
 
 
-var pool = mysql.createPool({
-    host     : 'localhost',
-    user     : 'root',
-    password : '123',
-    database : 'placement_cell'
-  });
+var pool = mysql.createPool(require('../database'));
   
 router.get('/getAllStates', function(req, res, next) {
   let query = 'select * from state';

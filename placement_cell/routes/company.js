@@ -4,12 +4,7 @@ var mysql      = require('mysql');
 var multer  = require('multer')
 var upload = multer({ dest: 'public/images/company/' })
 
-var pool = mysql.createPool({
-  host     : 'localhost',
-  user     : 'root',
-  password : '123',
-  database : 'placement_cell'
-});
+var pool = mysql.createPool(require('../database'));
 
 
 makeUpdateQuery = (data, tableName, _id) => {
@@ -52,13 +47,18 @@ router.get('/displayAll' , (req, res) => {
 
 
 router.get('/displaybyid/:company_id' , (req, res) => {
-    let company_id = req.params.company_id
-    let query = `select * from company where _id = ${company_id}`
-    pool.query(query, (err, result) => {
-        if(err) throw err
-        console.log(result)
-        res.render('company/DisplayById', {company : result[0]})
-    })
+    if(req.session.company != undefined && req.session.company.authenticated == true ){
+        let company_id = req.params.company_id
+        let query = `select * from company where _id = ${company_id}`
+        pool.query(query, (err, result) => {
+            if(err) throw err
+            console.log(result)
+            res.render('company/DisplayById', {company : result[0]})
+        })
+    }    
+    else{
+        res.redirect('/company/login');
+    }    
 })
 
 
@@ -81,6 +81,30 @@ router.post('/updatelogobyid/:company_id', upload.single('logo'), (req, res) => 
    })
 })
 
+router.get('/login', (req, res) => {
+    let authenticated = req.flash("authenticated")[0];
+    console.log(authenticated);
+    res.render('company/login' , {authenticated : authenticated});
+})
+
+router.post('/check_login', (req, res) => {
+    let query = `select * from company where email_id = '${req.body.email_id}' and password = '${req.body.password}'`
+    pool.query(query, (err, result) => {
+        if(err) throw err
+        if(result.length == 0){
+            req.flash("authenticated","false")
+            res.redirect('/company/login');
+        }
+        else {
+            req.session.company = {}
+            req.session.company.authenticated = true
+            req.session.company.info = result[0]
+            res.render('company/DashBoard.ejs', {company : req.session.company.info})
+        }
+        res.end()
+    })
+})
+
 
 
 router.get('/deletebyid' , (req, res) => {
@@ -90,6 +114,12 @@ router.get('/deletebyid' , (req, res) => {
         if(err) throw err
         res.redirect('displayAll')
     })
+})
+
+router.get('/logout', (req, res) => {
+    req.session.company.authenticated = false
+    req.session.company = null
+    res.redirect('/company/login')
 })
 
 module.exports = router;
