@@ -82,9 +82,12 @@ router.post('/updatelogobyid/:company_id', upload.single('logo'), (req, res) => 
 })
 
 router.get('/login', (req, res) => {
+    if(req.session.company != undefined && req.session.company.authenticated == true) {
+        res.render('company/DashBoard.ejs' , {company : req.session.company.info})
+    } else{
     let authenticated = req.flash("authenticated")[0];
-    console.log(authenticated);
     res.render('company/login' , {authenticated : authenticated});
+    }
 })
 
 router.post('/check_login', (req, res) => {
